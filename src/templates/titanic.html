@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block title %}Titanic{% endblock %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+    <div class="container-fluid card card-body bg-light">
+        <h3 class="text-center">Upload your dataset</h3>
+        <form method="post" class="w-100 mx-auto" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <div class="text-center">
+                <input type="submit" value="Upload" class="btn btn-success w-25">
+            </div>
+        </form>
+
+
+        <div class="table-responsive">
+            <table class="table table-striped table-hover mt-5">
+                <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Survived</th>
+                    <th scope="col">Pclass</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Sex</th>
+                    <th scope="col">Age</th>
+                    <th scope="col">SibSp</th>
+                    <th scope="col">Parch</th>
+                    <th scope="col">Ticket</th>
+                    <th scope="col">Fare</th>
+                    <th scope="col">Cabin</th>
+                    <th scope="col">Embarked</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for passenger in passengers %}
+
+                    <tr>
+                        <td>{{ passenger.id }}</td>
+                        <td>{{ passenger.survived }}</td>
+                        <td>{{ passenger.pclass }}</td>
+                        <td>{{ passenger.name }}</td>
+                        <td>{{ passenger.sex }}</td>
+                        <td>{% if passenger.age %}
+                            {{ passenger.age }}
+                        {% else %}
+                            {{ "" }}
+                        {% endif %}
+                        </td>
+                        <td>{{ passenger.sibsp }}</td>
+                        <td>{{ passenger.parch }}</td>
+                        <td>{{ passenger.ticket }}</td>
+                        <td>{{ passenger.fare }}</td>
+                        <td>{{ passenger.cabin }}</td>
+                        <td>{{ passenger.embarked }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
