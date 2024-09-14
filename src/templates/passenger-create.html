@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}New Passenger{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="container-fluid card card-body bg-light">
+        <div class="col-sm-12 col-md-8 col-lg-6  mx-auto">
+            <h3 class="text-center">New Passenger</h3>
+            <form method="post" class="w-100 mx-auto" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <div class="text-center">
+                    <input type="submit" value="Create" class="btn btn-success col-sm-12 col-md-6 col-lg-4">
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -3,6 +3,9 @@ from django.utils.translation import gettext_lazy as _
 
 
 class Passenger(models.Model):
+    class Meta:
+        ordering = ("-id",)
+
     class PClassChoices(models.IntegerChoices):
         FIRST = 1
         SECOND = 2
@@ -26,7 +29,7 @@ class Passenger(models.Model):
     parch = models.PositiveSmallIntegerField(verbose_name=_("Parent Child Count"))
     ticket = models.CharField(max_length=120, verbose_name=_("Ticket Code"))
     fare = models.DecimalField(max_digits=8, decimal_places=4, verbose_name=_("Fare"))
-    cabin = models.CharField(max_length=100, verbose_name=_("Cabin"))
+    cabin = models.CharField(max_length=100, verbose_name=_("Cabin"), null=True, blank=True)
     embarked = models.CharField(max_length=20, verbose_name=_("Embarked"), choices=EmbarkedChoices)
 
     def __str__(self):

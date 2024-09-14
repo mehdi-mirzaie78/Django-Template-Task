@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Passenger Details{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="container-fluid card card-body bg-light">
+        <div class="col-sm-12 col-md-8 col-lg-6 mx-auto">
+            <a href="{% url 'home:titanic' %}">Go Back</a>
+            <h3 class="text-center">Passenger Details</h3>
+            <form method="post" class="w-100 mx-auto" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <div class="row justify-content-between" style="margin: 1px">
+                    <input type="submit" value="Update" class="btn btn-primary col-sm-12 col-md-4 col-lg-2 mb-2">
+                    <a class="btn btn-danger col-sm-6 col-md-4 col-lg-2 mb-2" href="{% url 'home:passenger-delete' passenger.id %}">Delete</a>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
